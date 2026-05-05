@@ -4,8 +4,10 @@ import './App.css'
 const App = () => {
 
   const[users, setUsers] = useState([]); // Lista de usuários
-  const[load, setLoad] = useState(false); // Carregamento  
+  const[loading, setLoading] = useState(false); // Carregamento  
   const[error, setError] = useState(null); // Erros 
+
+  // Função de busca
 
   return (
     <div>
