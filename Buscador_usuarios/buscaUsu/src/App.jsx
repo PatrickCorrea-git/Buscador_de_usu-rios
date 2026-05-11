@@ -51,8 +51,7 @@ const App = () => {
     <div>
       <h1>Buscador de usuários</h1>
 
-      <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} />
-      <button onClick={() => searchUsers(search)}>Buscar</button>
+      <input type="text" value={search} placeholder="Digite o nome do usuário..." onChange={(e) => setSearch(e.target.value)} />
 
       {loading && <p>Carregando...</p>}
       {error && <p>{error}</p>}
