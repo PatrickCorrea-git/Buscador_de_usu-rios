@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import './App.css'
 
 const App = () => {
@@ -32,6 +32,20 @@ const App = () => {
     }
     
     };
+
+    // Função de debounce para evitar muitas requisições
+    useEffect(() => {
+      if (search.trim() === "") {
+        setUsers([]);
+        return;
+      }
+
+      const timeout = setTimeout (() => {
+        searchUsers(search);
+      }, 500);
+
+      return () => clearTimeout(timeout);
+    }, [search]);
 
   return (
     <div>
