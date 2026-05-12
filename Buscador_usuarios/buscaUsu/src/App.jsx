@@ -30,25 +30,26 @@ const App = () => {
     } finally {
       setLoading(false);
     }
-    
-    };
 
-    // Função de debounce para evitar muitas requisições
-    useEffect(() => {
-      if (search.trim() === "") {
-        setUsers([]);
-        return;
-      }
+  };
 
-      const timeout = setTimeout (() => {
-        searchUsers(search);
-      }, 500);
+  // Função de debounce para evitar muitas requisições
+  
+  useEffect(() => {
+    if (search.trim() === "") {
+      setUsers([]);
+      return;
+    }
 
-      return () => clearTimeout(timeout);
-    }, [search]);
+    const timeout = setTimeout(() => {
+      searchUsers(search);
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, [search]);
 
   return (
-    <div>
+    <div classname="container">
       <h1>Buscador de usuários</h1>
 
       <input type="text" value={search} placeholder="Digite o nome do usuário..." onChange={(e) => setSearch(e.target.value)} />
@@ -56,13 +57,21 @@ const App = () => {
       {loading && <p>Carregando...</p>}
       {error && <p>{error}</p>}
 
-      <ul>
-        {users.map((user) => (
-          <li key={user.id}>
-            {user.name}
-          </li>
-        ))}
-      </ul>
+      {!loading && users.length === 0 && search.trim() !== "" && (
+        <p>Nenhum usuário encontrado</p>
+      )}
+
+
+      {!loading && !error && users.length > 0 && (
+        <ul>
+          {users.map((user) => (
+            <li key={user.id}>
+              {user.name}
+            </li>
+          ))}
+        </ul>
+      )}
+
     </div>
   )
 }
